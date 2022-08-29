@@ -13,7 +13,7 @@ class ShowMovies extends Command {
     public function configure(){
         $this->setName('show')
              ->addArgument('movieName',InputArgument::REQUIRED, 'Movie name.')
-             ->addOption('plot',null,InputOption::VALUE_OPTIONAL,'Short or Full plot', 'short');
+             ->addOption('fullPlot',null,InputOption::VALUE_OPTIONAL,'Short or Full plot', 'short');
             }
     
     public function getMovies($movieName,$plot) {
@@ -33,7 +33,10 @@ class ShowMovies extends Command {
 
     public function execute(InputInterface $input, OutputInterface $output){
         $movieName = $input->getArgument('movieName');
-        $plot = $input->getOption('plot');
+        $plot = $input->getOption('fullPlot');
+        if ($plot == "") {
+            $plot = "full";
+        }
         $movie2 = $this->getMovies($movieName,$plot);
         $arrayForTable=[];
         foreach($movie2 as $name => $val) {
