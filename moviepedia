@@ -1,0 +1,13 @@
+#! /usr/bin/env php
+
+<?php
+
+use Symfony\Component\Console\Application;
+
+require 'vendor/autoload.php';
+
+$app = new Application('Moviepedia', '1.0');//inicializamos app
+
+$app->add(new Acme\ShowMovies);
+
+$app->run();
